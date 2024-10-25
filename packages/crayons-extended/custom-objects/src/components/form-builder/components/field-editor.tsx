@@ -511,7 +511,17 @@ export class FieldEditor {
     } else {
       try {
         const strNewFieldLabel = strInputValue.toLowerCase();
-        const arrFields = this.formValues.fields;
+        let arrFields = this.formValues.fields;
+        // Check if any field has sections and concatenate fields from sections
+        arrFields = arrFields.reduce((acc, field) => {
+          if (
+            field?.field_options?.has_sections &&
+            Array.isArray(field?.fields)
+          ) {
+            return acc.concat(field?.fields);
+          }
+          return acc.concat(field);
+        }, []);
 
         if (
           arrFields &&
