@@ -1,6 +1,7 @@
 import { Component, h, Prop, EventEmitter, Event, State } from '@stencil/core';
 import { TranslationController } from '../../../global/Translation';
 import { getMaxLimitProperty, i18nText } from '../utils/form-builder-utils';
+import { DYNAMIC_SECTION } from '../../../constants/article-links';
 
 @Component({
   tag: 'fb-section-create',
@@ -95,6 +96,12 @@ export class FormBuilderSection {
     }
   }
 
+  private redirectToArticlesPage(event: CustomEvent) {
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    window.open(DYNAMIC_SECTION);
+  }
+
   private fieldValueChangeHandler(event: CustomEvent) {
     event.stopImmediatePropagation();
     event.stopPropagation();
@@ -154,7 +161,10 @@ export class FormBuilderSection {
                 'formBuilder.sections.sectionDescription'
               )}
             </span>
-            <fw-button color='link'>
+            <fw-button
+              color='link'
+              onFwClick={this.redirectToArticlesPage.bind(this)}
+            >
               {TranslationController.t(
                 'formBuilder.fieldTypeRelationshipDescLinkLabel'
               )}
