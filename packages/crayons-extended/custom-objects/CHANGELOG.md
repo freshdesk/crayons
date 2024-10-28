@@ -3,17 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.4.0-beta.22](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.21...@freshworks/crayons-custom-objects@1.4.0-beta.22) (2024-10-28)
-
+## [1.4.0-beta.22](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.21...@freshworks/crayons-custom-objects@1.4.0-beta.22) (2024-10-28)
 
 ### Bug Fixes
 
-* added support article link ([cf63a30](https://github.com/freshworks/crayons/commit/cf63a30ae8eaf0b7793ae1361147de7b676f909d))
-* added the fix for error label validation in section ([#944](https://github.com/freshworks/crayons/issues/944)) ([5cab368](https://github.com/freshworks/crayons/commit/5cab368af667a150a0060c2252d3b09bc249634c))
-
-
-
-
+- added support article link ([cf63a30](https://github.com/freshworks/crayons/commit/cf63a30ae8eaf0b7793ae1361147de7b676f909d))
+- added the fix for error label validation in section ([#944](https://github.com/freshworks/crayons/issues/944)) ([5cab368](https://github.com/freshworks/crayons/commit/5cab368af667a150a0060c2252d3b09bc249634c))
 
 ## [1.4.0-beta.21](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.20...@freshworks/crayons-custom-objects@1.4.0-beta.21) (2024-10-21)
 
