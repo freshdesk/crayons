@@ -337,7 +337,7 @@ export class Datepicker {
   private formatDate(value) {
     if (!value) return value;
     // For Icelandic language, the date format is different. There is a discrepency which is handled in this PR https://github.com/date-fns/date-fns/pull/3934
-    if (this.langModule?.code === 'is') {
+    if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMMM yyyy') {
       const isLanguageDisplayFormat = 'dd MMMM yyyy';
       const icelandicMonthMapper = {
         'jan.': 'jan.',
