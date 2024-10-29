@@ -836,14 +836,14 @@ describe('fw-datepicker', () => {
   it('should update the value of the date input when value is set, when the locale is is', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<fw-datepicker locale="is" value="2022-04-20"></fw-datepicker>'
+      '<fw-datepicker locale="is" value="2022--20"></fw-datepicker>'
     );
     await page.waitForChanges();
     const dp = await page.find('fw-datepicker');
     await dp.setProperty('value', '2022-11-20');
     await page.waitForChanges();
     const val = await dp.getProperty('value');
-    expect(val).toBe('20.04.2022');
+    expect(val).toBe('20.11.2022');
     const shadow = await page.find(
       'fw-datepicker >>> fw-input >>> :first-child'
     );
