@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-beta.22](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.21...@freshworks/crayons-custom-objects@1.4.0-beta.22) (2024-10-28)
+
+### Bug Fixes
+
+- added support article link ([cf63a30](https://github.com/freshworks/crayons/commit/cf63a30ae8eaf0b7793ae1361147de7b676f909d))
+- added the fix for error label validation in section ([#944](https://github.com/freshworks/crayons/issues/944)) ([5cab368](https://github.com/freshworks/crayons/commit/5cab368af667a150a0060c2252d3b09bc249634c))
+
+## [1.4.0-beta.21](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.20...@freshworks/crayons-custom-objects@1.4.0-beta.21) (2024-10-21)
+
+### Bug Fixes
+
+- pass of position of the form values on searching specific field ([5e388e5](https://github.com/freshworks/crayons/commit/5e388e53ce5b8a82fdcc49cf4e75bb9f2fec5a88))
+
+## [1.4.0-beta.20](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.19...@freshworks/crayons-custom-objects@1.4.0-beta.20) (2024-10-15)
+
+### Bug Fixes
+
+- added the search for section fields ([#942](https://github.com/freshworks/crayons/issues/942)) ([d5c304f](https://github.com/freshworks/crayons/commit/d5c304fa6571dc72b258defb7284dfc928b0988c))
+
+## [1.4.0-beta.19](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.18...@freshworks/crayons-custom-objects@1.4.0-beta.19) (2024-10-03)
+
+### Bug Fixes
+
+- removed the icon for dynamic sections ([#941](https://github.com/freshworks/crayons/issues/941)) ([2d19558](https://github.com/freshworks/crayons/commit/2d19558ccd3bbc154dc7373f90706d34ec883f13))
+
 ## [1.4.0-beta.18](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.17...@freshworks/crayons-custom-objects@1.4.0-beta.18) (2024-09-30)
 
 ### Bug Fixes

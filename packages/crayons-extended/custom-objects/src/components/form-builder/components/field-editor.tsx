@@ -511,7 +511,17 @@ export class FieldEditor {
     } else {
       try {
         const strNewFieldLabel = strInputValue.toLowerCase();
-        const arrFields = this.formValues.fields;
+        let arrFields = this.formValues.fields;
+        // Check if any field has sections and concatenate fields from sections
+        arrFields = arrFields.reduce((acc, field) => {
+          if (
+            field?.field_options?.has_sections &&
+            Array.isArray(field?.fields)
+          ) {
+            return acc.concat(field?.fields);
+          }
+          return acc.concat(field);
+        }, []);
 
         if (
           arrFields &&
@@ -948,7 +958,10 @@ export class FieldEditor {
 
   private confirmDeleteFieldHandler = () => {
     this.isDeleting = true;
-    this.fwDelete.emit({ index: this.index });
+    this.fwDelete.emit({
+      index: this.index,
+      position: this.oldFormValues?.position,
+    });
     this.modalConfirmDelete?.close();
   };
 
@@ -2001,6 +2014,21 @@ export class FieldEditor {
           key: 'customDefault',
           selected: true,
           tag: objProductConfig.defaultTagLabel,
+        });
+        if (!fwLabelItems) {
+          fwLabelItems = [elDefaultCustomTag];
+        } else {
+          fwLabelItems.push(elDefaultCustomTag);
+        }
+      } else if (
+        this.dataProvider.isSectionFieldMatch &&
+        this.dataProvider?.field_options?.is_section_field &&
+        this.disabledSort
+      ) {
+        const elDefaultCustomTag = this.renderFwLabel({
+          key: 'sectionField',
+          selected: true,
+          tag: 'sectionFieldTag',
         });
         if (!fwLabelItems) {
           fwLabelItems = [elDefaultCustomTag];
