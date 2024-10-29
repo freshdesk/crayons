@@ -357,13 +357,11 @@ export class Datepicker {
         /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
         (match) => icelandicMonthMapper[match]
       );
-      return this.displayFormat
-        ? formatISO(
-            parse(correctedDate, isLanguageDisplayFormat, new Date(), {
-              locale: this.langModule,
-            })
-          )
-        : formatISO(new Date(value));
+      return formatISO(
+        parse(correctedDate, isLanguageDisplayFormat, new Date(), {
+          locale: this.langModule,
+        })
+      );
     }
     return this.displayFormat
       ? formatISO(
