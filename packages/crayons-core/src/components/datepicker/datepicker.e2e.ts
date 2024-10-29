@@ -814,4 +814,40 @@ describe('fw-datepicker', () => {
     const dateVal = await dateInput.getAttribute('value');
     expect(dateVal).toBe('07/22/2022');
   });
+
+  it('should update the value of the date input when value is set, when the locale is is', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<fw-datepicker locale="is" value="2022-04-20"></fw-datepicker>'
+    );
+    await page.waitForChanges();
+    const dp = await page.find('fw-datepicker');
+    await dp.setProperty('value', '2022-04-20');
+    await page.waitForChanges();
+    const val = await dp.getProperty('value');
+    expect(val).toBe('20.04.2022');
+    const shadow = await page.find(
+      'fw-datepicker >>> fw-input >>> :first-child'
+    );
+    const alertElement = await shadow.find('.invalid-alert');
+    expect(alertElement).toBeFalsy();
+  });
+
+  it('should update the value of the date input when value is set, when the locale is is', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<fw-datepicker locale="is" value="2022-04-20"></fw-datepicker>'
+    );
+    await page.waitForChanges();
+    const dp = await page.find('fw-datepicker');
+    await dp.setProperty('value', '2022-11-20');
+    await page.waitForChanges();
+    const val = await dp.getProperty('value');
+    expect(val).toBe('20.04.2022');
+    const shadow = await page.find(
+      'fw-datepicker >>> fw-input >>> :first-child'
+    );
+    const alertElement = await shadow.find('.invalid-alert');
+    expect(alertElement).toBeFalsy();
+  });
 });
