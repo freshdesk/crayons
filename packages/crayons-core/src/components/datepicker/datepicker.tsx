@@ -349,7 +349,7 @@ export class Datepicker {
         'júlí': 'júlí',
         'ágúst': 'á',
         'sept.': 's',
-        'okt.': 'o',
+        'okt.': 'ó',
         'nóv.': 'n',
         'des.': 'd',
       };
