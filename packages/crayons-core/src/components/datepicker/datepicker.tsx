@@ -363,6 +363,7 @@ export class Datepicker {
         })
       );
     }
+
     return this.displayFormat
       ? formatISO(
           parse(value, this.displayFormat, new Date(), {
