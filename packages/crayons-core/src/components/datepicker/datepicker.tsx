@@ -336,6 +336,34 @@ export class Datepicker {
 
   private formatDate(value) {
     if (!value) return value;
+    // For Icelandic language, the date format is different. There is a discrepency which is handled in this PR https://github.com/date-fns/date-fns/pull/3934
+    if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMM yyyy') {
+      const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
+      const icelandicMonthMapper = {
+        'jan.': 'jan.',
+        'feb.': 'feb.',
+        'mars': 'm',
+        'apríl': 'apríl',
+        'maí': 'maí',
+        'júní': 'júní',
+        'júlí': 'júlí',
+        'ágúst': 'á',
+        'sept.': 's',
+        'okt.': 'ó',
+        'nóv.': 'n',
+        'des.': 'd',
+      };
+      const correctedDate = value.replace(
+        /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
+        (match) => icelandicMonthMapper[match]
+      );
+      return formatISO(
+        parse(correctedDate, icelandicLanguageDisplayFormat, new Date(), {
+          locale: this.langModule,
+        })
+      );
+    }
+
     return this.displayFormat
       ? formatISO(
           parse(value, this.displayFormat, new Date(), {
