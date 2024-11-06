@@ -3,21 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [4.3.0-beta.20](https://github.com/freshworks/crayons/compare/@freshworks/crayons@4.3.0-beta.19...@freshworks/crayons@4.3.0-beta.20) (2024-11-06)
-
+## [4.3.0-beta.20](https://github.com/freshworks/crayons/compare/@freshworks/crayons@4.3.0-beta.19...@freshworks/crayons@4.3.0-beta.20) (2024-11-06)
 
 ### Bug Fixes
 
-* adding specifics for icelandic language ([d5cafad](https://github.com/freshworks/crayons/commit/d5cafad0ac2f09daae9d79165de78bfd6bb17e2f))
-* change datepicker parse changes for icelandic language ([cb19079](https://github.com/freshworks/crayons/commit/cb19079b26fa38ad69526fc0ef9c926f9da5d35d))
-* changes for october month mapping ([44e7ac5](https://github.com/freshworks/crayons/commit/44e7ac559ddf6abeda81d70cce40fc9616e55fab))
-* changes related to icelandic language ([bfda140](https://github.com/freshworks/crayons/commit/bfda1403de2edd814cd86005712290977b71c13a))
-* icelandic language display format name change ([27e3532](https://github.com/freshworks/crayons/commit/27e353215b92008583048ebe5300ecc6d87d7f4a))
-* minor changes in datepicker ([5fef5b9](https://github.com/freshworks/crayons/commit/5fef5b9923f745c63aecda89182a433a4859ef12))
-
-
-
-
+- adding specifics for icelandic language ([d5cafad](https://github.com/freshworks/crayons/commit/d5cafad0ac2f09daae9d79165de78bfd6bb17e2f))
+- change datepicker parse changes for icelandic language ([cb19079](https://github.com/freshworks/crayons/commit/cb19079b26fa38ad69526fc0ef9c926f9da5d35d))
+- changes for october month mapping ([44e7ac5](https://github.com/freshworks/crayons/commit/44e7ac559ddf6abeda81d70cce40fc9616e55fab))
+- changes related to icelandic language ([bfda140](https://github.com/freshworks/crayons/commit/bfda1403de2edd814cd86005712290977b71c13a))
+- icelandic language display format name change ([27e3532](https://github.com/freshworks/crayons/commit/27e353215b92008583048ebe5300ecc6d87d7f4a))
+- minor changes in datepicker ([5fef5b9](https://github.com/freshworks/crayons/commit/5fef5b9923f745c63aecda89182a433a4859ef12))
 
 ## [4.3.0-beta.18](https://github.com/freshworks/crayons/compare/@freshworks/crayons@4.3.0-beta.17...@freshworks/crayons@4.3.0-beta.18) (2024-10-03)
 
