@@ -522,7 +522,7 @@ export function updateChoicesInFields(instance, event) {
     const parentField = getFieldBasedOnLevel(field, level - 1);
 
     // Filter choices in the parent field based on dependent IDs
-    const parentChoices = parentField.choices.filter((choice) => {
+    const parentChoices = parentField?.choices?.filter((choice) => {
       return choice.dependent_ids.choice.includes(choiceIds?.[0]);
     });
 
