@@ -511,11 +511,34 @@ export function getChildChoices(field, pChoices, pLevel, depLevels) {
 
 export function updateChoicesInFields(instance, event) {
   const field = instance.fieldBuilderOptions;
-  const { level, parentId, value, choice } = event.detail;
+  const { level, parentId, value, choice, choiceIds } = event.detail;
 
   // Adding Choices to current level
   const currentField = getFieldBasedOnLevel(field, level);
   currentField.choices = value;
+
+  if (level > 1) {
+    // Retrieve the parent field based on the specified level
+    const parentField = getFieldBasedOnLevel(field, level - 1);
+
+    // Filter choices in the parent field based on dependent IDs
+    const parentChoices = parentField.choices.filter((choice) => {
+      return choice.dependent_ids.choice.includes(choiceIds[0]);
+    });
+
+    // Update dependent choices based on its order
+    if (parentChoices?.[0]?.dependent_ids?.choice) {
+      parentChoices[0].dependent_ids.choice = value.reduce(
+        (reorderedChoices, choice) => {
+          if (parentChoices[0].dependent_ids.choice.includes(choice.id)) {
+            reorderedChoices.push(choice.id);
+          }
+          return reorderedChoices;
+        },
+        []
+      );
+    }
+  }
 
   if (!currentField.id) {
     currentField.id = createUUID();
