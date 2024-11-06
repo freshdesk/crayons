@@ -523,7 +523,7 @@ export function updateChoicesInFields(instance, event) {
 
     // Filter choices in the parent field based on dependent IDs
     const parentChoices = parentField.choices.filter((choice) => {
-      return choice.dependent_ids.choice.includes(choiceIds[0]);
+      return choice.dependent_ids.choice.includes(choiceIds?.[0]);
     });
 
     // Update dependent choices based on its order
