@@ -999,9 +999,41 @@ export class Datepicker {
 
   processValueChange(val, emitChange = false) {
     // show error if not ISO format and not display format
-    const parsedDate = parse(val, this.displayFormat, new Date(), {
-      locale: this.langModule,
-    });
+    let parsedDate;
+    if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMM yyyy') {
+      const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
+      const icelandicMonthMapper = {
+        'jan.': 'jan.',
+        'feb.': 'feb.',
+        'mars': 'm',
+        'apríl': 'apríl',
+        'maí': 'maí',
+        'júní': 'júní',
+        'júlí': 'júlí',
+        'ágúst': 'á',
+        'sept.': 's',
+        'okt.': 'ó',
+        'nóv.': 'n',
+        'des.': 'd',
+      };
+      const correctedDate = val.replace(
+        /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
+        (match) => icelandicMonthMapper[match]
+      );
+
+      parsedDate = parse(
+        correctedDate,
+        icelandicLanguageDisplayFormat,
+        new Date(),
+        {
+          locale: this.langModule,
+        }
+      );
+    } else {
+      parsedDate = parse(val, this.displayFormat, new Date(), {
+        locale: this.langModule,
+      });
+    }
     const year = getYear(
       parse(val, this.displayFormat, new Date(), {
         locale: this.langModule,
