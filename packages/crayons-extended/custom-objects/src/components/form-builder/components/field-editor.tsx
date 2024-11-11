@@ -301,7 +301,7 @@ export class FieldEditor {
         hasCustomProperty(objDP, 'isSection') && objDP?.isSection === true
           ? true
           : false;
-      this.editSectionField = objDP.field_options?.is_section_field;
+      this.editSectionField = objDP.field_options?.is_section_field === 'true';
       // Currently supports dropdown format
       this.isDependentField = objDP.type === 'DEPENDENT_FIELD';
 
@@ -2085,6 +2085,13 @@ export class FieldEditor {
       this.createDynamicSection ||
       this.sectionCreatedForAllChoices;
 
+    const showDeleteBtn =
+      !this.expanded &&
+      !this.isPrimaryField &&
+      !this.isDeleting &&
+      !this.isDefaultNonCustomField &&
+      !this.editSectionField;
+
     return (
       <Host tabIndex='-1'>
         <div
@@ -2162,22 +2169,18 @@ export class FieldEditor {
                 </fw-button>
               </fw-tooltip>
             )}
-            {!this.expanded &&
-              !this.isPrimaryField &&
-              !this.isDeleting &&
-              !this.isDefaultNonCustomField &&
-              !this.editSectionField && (
-                <fw-button
-                  part='delete-field-btn'
-                  size='icon'
-                  color='secondary'
-                  disabled={boolDisableDelete}
-                  class={`${strBaseClassName}-delete-button`}
-                  onFwClick={this.deleteFieldClickHandler}
-                >
-                  <fw-icon name='delete'></fw-icon>
-                </fw-button>
-              )}
+            {showDeleteBtn && (
+              <fw-button
+                part='delete-field-btn'
+                size='icon'
+                color='secondary'
+                disabled={boolDisableDelete}
+                class={`${strBaseClassName}-delete-button`}
+                onFwClick={this.deleteFieldClickHandler}
+              >
+                <fw-icon name='delete'></fw-icon>
+              </fw-button>
+            )}
             {/* {!this.expanded && this.isDefaultNonCustomField && (
               <span class={`${strBaseClassName}-lock-container`}>
                 <fw-icon name='lock'></fw-icon>
