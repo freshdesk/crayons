@@ -511,22 +511,32 @@ export class FieldEditor {
     } else {
       try {
         const strNewFieldLabel = strInputValue.toLowerCase();
-        let arrFields = this.formValues.fields;
-        // Check if any field has sections and concatenate fields from sections
-        arrFields = arrFields.reduce((acc, field) => {
-          if (
-            field?.field_options?.has_sections &&
-            Array.isArray(field?.fields)
-          ) {
-            return acc.concat(field?.fields);
-          }
-          return acc.concat(field);
-        }, []);
+        const initialFields = this.formValues.fields;
+        const collectedFields = initialFields.reduce(
+          (acc, field) => {
+            acc.topLevelFields.push(field); // Add each field to the main array
+            // Collect section fields separately if has_sections is true
+            if (
+              field?.field_options?.has_sections &&
+              Array.isArray(field.fields)
+            ) {
+              acc.sectionFields.push(...field.fields);
+            }
+            return acc;
+          },
+          { topLevelFields: [], sectionFields: [] }
+        );
+
+        // Merge all fields at the end
+        const convFields = [
+          ...collectedFields.topLevelFields,
+          ...collectedFields.sectionFields,
+        ];
 
         if (
-          arrFields &&
-          arrFields.length > 0 &&
-          arrFields.some(
+          convFields &&
+          convFields.length > 0 &&
+          convFields.some(
             (e, fieldIndex) =>
               this.index !== fieldIndex &&
               !e?.isNew &&
