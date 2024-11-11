@@ -81,6 +81,31 @@ const getWeekDays = (lang): any => {
     format(addDays(startOfWeek(new Date()), i), 'EEEEE', { locale: lang })
   );
 };
+
+const parseIcelandicDate = (value, langModule) => {
+  const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
+  const icelandicMonthMapper = {
+    'jan.': 'jan.',
+    'feb.': 'feb.',
+    'mars': 'm',
+    'apríl': 'apríl',
+    'maí': 'maí',
+    'júní': 'júní',
+    'júlí': 'júlí',
+    'ágúst': 'á',
+    'sept.': 's',
+    'okt.': 'ó',
+    'nóv.': 'n',
+    'des.': 'd',
+  };
+  const correctedDate = value.replace(
+    /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
+    (match) => icelandicMonthMapper[match]
+  );
+  return parse(correctedDate, icelandicLanguageDisplayFormat, new Date(), {
+    locale: langModule,
+  });
+};
 @Component({ tag: 'fw-datepicker', styleUrl: 'datepicker.scss', shadow: true })
 export class Datepicker {
   @State() showDatePicker: boolean;
@@ -338,30 +363,7 @@ export class Datepicker {
     if (!value) return value;
     // For Icelandic language, the date format is different. There is a discrepency which is handled in this PR https://github.com/date-fns/date-fns/pull/3934
     if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMM yyyy') {
-      const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
-      const icelandicMonthMapper = {
-        'jan.': 'jan.',
-        'feb.': 'feb.',
-        'mars': 'm',
-        'apríl': 'apríl',
-        'maí': 'maí',
-        'júní': 'júní',
-        'júlí': 'júlí',
-        'ágúst': 'á',
-        'sept.': 's',
-        'okt.': 'ó',
-        'nóv.': 'n',
-        'des.': 'd',
-      };
-      const correctedDate = value.replace(
-        /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
-        (match) => icelandicMonthMapper[match]
-      );
-      return formatISO(
-        parse(correctedDate, icelandicLanguageDisplayFormat, new Date(), {
-          locale: this.langModule,
-        })
-      );
+      return formatISO(parseIcelandicDate(value, this.langModule));
     }
 
     return this.displayFormat
@@ -1001,34 +1003,7 @@ export class Datepicker {
     // show error if not ISO format and not display format
     let parsedDate;
     if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMM yyyy') {
-      const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
-      const icelandicMonthMapper = {
-        'jan.': 'jan.',
-        'feb.': 'feb.',
-        'mars': 'm',
-        'apríl': 'apríl',
-        'maí': 'maí',
-        'júní': 'júní',
-        'júlí': 'júlí',
-        'ágúst': 'á',
-        'sept.': 's',
-        'okt.': 'ó',
-        'nóv.': 'n',
-        'des.': 'd',
-      };
-      const correctedDate = val.replace(
-        /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
-        (match) => icelandicMonthMapper[match]
-      );
-
-      parsedDate = parse(
-        correctedDate,
-        icelandicLanguageDisplayFormat,
-        new Date(),
-        {
-          locale: this.langModule,
-        }
-      );
+      parsedDate = parseIcelandicDate(val, this.langModule);
     } else {
       parsedDate = parse(val, this.displayFormat, new Date(), {
         locale: this.langModule,
