@@ -896,13 +896,23 @@ export class Datepicker {
     fromDate = fromDate?.trim();
     toDate = toDate?.trim();
 
-    const parsedFromDate = parse(fromDate, this.displayFormat, new Date(), {
-      locale: this.langModule,
-    });
+    let parsedFromDate;
+    if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMM yyyy') {
+      parsedFromDate = parseIcelandicDate(fromDate, this.langModule);
+    } else {
+      parsedFromDate = parse(fromDate, this.displayFormat, new Date(), {
+        locale: this.langModule,
+      });
+    }
 
-    const parsedToDate = parse(toDate, this.displayFormat, new Date(), {
-      locale: this.langModule,
-    });
+    let parsedToDate;
+    if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMM yyyy') {
+      parsedToDate = parseIcelandicDate(toDate, this.langModule);
+    } else {
+      parsedToDate = parse(toDate, this.displayFormat, new Date(), {
+        locale: this.langModule,
+      });
+    }
 
     const isValidFromDate = isValid(parsedFromDate);
     const isValidToDate = isValid(parsedToDate);
