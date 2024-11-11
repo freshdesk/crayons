@@ -294,6 +294,7 @@ export class FbFieldDropdown {
         type: 'REPOSITION',
         errorType: this.errorType,
         value: [...this.dataProvider],
+        choiceIds: this.choiceIds,
         level: this.level,
       });
     }
