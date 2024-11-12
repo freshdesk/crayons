@@ -1579,17 +1579,34 @@ export class Datepicker {
           this.value?.split(TranslationController.t('datepicker.to')) || [];
         fromDateStr = fromDateStr?.trim();
         toDateStr = toDateStr?.trim();
-        const parsedFromDate = parse(
-          fromDateStr,
-          this.displayFormat,
-          new Date(),
-          {
+        let parsedFromDate;
+        if (
+          this.langModule?.code === 'is' &&
+          this.dateFormat === 'dd MMM yyyy'
+        ) {
+          parsedFromDate = parseIcelandicDate(
+            fromDateStr,
+            this.langModule
+          ).valueOf();
+        } else {
+          parsedFromDate = parse(fromDateStr, this.displayFormat, new Date(), {
             locale: this.langModule,
-          }
-        ).valueOf();
-        const parsedToDate = parse(toDateStr, this.displayFormat, new Date(), {
-          locale: this.langModule,
-        }).valueOf();
+          }).valueOf();
+        }
+        let parsedToDate;
+        if (
+          this.langModule?.code === 'is' &&
+          this.dateFormat === 'dd MMM yyyy'
+        ) {
+          parsedToDate = parseIcelandicDate(
+            fromDateStr,
+            this.langModule
+          ).valueOf();
+        } else {
+          parsedToDate = parse(toDateStr, this.displayFormat, new Date(), {
+            locale: this.langModule,
+          }).valueOf();
+        }
         if (this.startDate !== parsedFromDate) {
           this.startDate = parsedFromDate;
         }
