@@ -1032,9 +1032,9 @@ export class Datepicker {
     if (
       year < this.minYear ||
       year > this.maxYear ||
-      !isValid(parsedDate) ||
+      (this.langModule?.code !== 'is' && !isValid(val)) ||
       (this.langModule?.code !== 'is' &&
-        !isMatch(parsedDate, this.displayFormat, {
+        !isMatch(val, this.displayFormat, {
           locale: this.langModule,
         })) ||
       !this.isDateWithinMinMaxDate(parsedDate.valueOf(), false)
