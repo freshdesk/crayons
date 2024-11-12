@@ -1032,7 +1032,7 @@ export class Datepicker {
     if (
       year < this.minYear ||
       year > this.maxYear ||
-      (this.langModule?.code !== 'is' && !isValid(val)) ||
+      (this.langModule?.code !== 'is' && !isValid(parsedDate)) ||
       (this.langModule?.code !== 'is' &&
         !isMatch(val, this.displayFormat, {
           locale: this.langModule,
