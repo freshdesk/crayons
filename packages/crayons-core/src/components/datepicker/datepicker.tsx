@@ -901,11 +901,11 @@ export class Datepicker {
     fromDate = fromDate?.trim();
     toDate = toDate?.trim();
 
-    const parsedFromDate = parseDate(fromDate, this.displayFormat, {
+    const parsedFromDate = parse(fromDate, this.displayFormat, new Date(), {
       locale: this.langModule,
     });
 
-    const parsedToDate = parseDate(toDate, this.displayFormat, {
+    const parsedToDate = parse(toDate, this.displayFormat, new Date(), {
       locale: this.langModule,
     });
 
