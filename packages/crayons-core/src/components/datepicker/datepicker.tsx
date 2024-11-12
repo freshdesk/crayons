@@ -1019,11 +1019,16 @@ export class Datepicker {
         locale: this.langModule,
       });
     }
-    const year = getYear(
-      parse(val, this.displayFormat, new Date(), {
-        locale: this.langModule,
-      })
-    );
+    let year;
+    if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMM yyyy') {
+      year = getYear(parseIcelandicDate(val, this.langModule));
+    } else {
+      year = getYear(
+        parse(val, this.displayFormat, new Date(), {
+          locale: this.langModule,
+        })
+      );
+    }
     if (
       year < this.minYear ||
       year > this.maxYear ||
