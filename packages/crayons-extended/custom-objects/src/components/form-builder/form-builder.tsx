@@ -705,7 +705,7 @@ export class FormBuilder {
       };
       cleanupSearchFlags(arrFieldElements);
       const arrResults = searchFields(arrFieldElements); // Get all matching results including those in nested sections
-      this.searching = true; // Set the searching flag to ensure the search results are displayed when the result is empty
+      this.searching = arrResults.length > 0;
       this.arrSearchedFields = arrResults.length
         ? deepCloneObject(arrResults)
         : null;
