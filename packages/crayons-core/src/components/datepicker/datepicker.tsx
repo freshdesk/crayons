@@ -1039,14 +1039,6 @@ export class Datepicker {
         })) ||
       !this.isDateWithinMinMaxDate(parsedDate.valueOf(), false)
     ) {
-      console.info(
-        year < this.minYear,
-        year > this.maxYear,
-        !isValid(parsedDate),
-        !isMatch(parsedDate, this.displayFormat, {
-          locale: this.langModule,
-        }) || !this.isDateWithinMinMaxDate(parsedDate.valueOf(), false)
-      );
       this.isDateInvalid = !!parsedDate;
       this.state =
         this.showErrorOnInvalidDate && this.isDateInvalid
