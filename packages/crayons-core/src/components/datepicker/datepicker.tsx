@@ -1039,7 +1039,7 @@ export class Datepicker {
         })) ||
       !this.isDateWithinMinMaxDate(parsedDate.valueOf(), false)
     ) {
-      this.isDateInvalid = !!parsedDate;
+      this.isDateInvalid = !!val;
       this.state =
         this.showErrorOnInvalidDate && this.isDateInvalid
           ? 'error'
