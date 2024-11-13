@@ -83,6 +83,7 @@ const getWeekDays = (lang): any => {
 };
 
 const parseIcelandicDate = (value, langModule) => {
+  // For Icelandic language, the date format is different. There is a discrepency which is handled in this PR https://github.com/date-fns/date-fns/pull/3934
   if (!value) return value;
   const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
   const icelandicMonthMapper = {
