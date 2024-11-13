@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import {
   isValid,
-  parse,
+  parse as parseDate,
   parseISO,
   getYear,
   getMonth,
@@ -83,6 +83,7 @@ const getWeekDays = (lang): any => {
 };
 
 const parseIcelandicDate = (value, langModule) => {
+  if (!value) return value;
   const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
   const icelandicMonthMapper = {
     'jan.': 'jan.',
@@ -98,11 +99,11 @@ const parseIcelandicDate = (value, langModule) => {
     'nóv.': 'n',
     'des.': 'd',
   };
-  const correctedDate = value.replace(
+  const correctedDate = value?.replace(
     /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
     (match) => icelandicMonthMapper[match]
   );
-  return parse(
+  return parseDate(
     correctedDate,
     icelandicLanguageDisplayFormat,
     new Date(),
@@ -110,11 +111,12 @@ const parseIcelandicDate = (value, langModule) => {
   );
 };
 
-const parseDate = (value, displayFormat, langModule) => {
+const parse = (value, displayFormat, date, langModule) => {
+  if (!value) return value;
   if (langModule?.locale?.code === 'is' && displayFormat === 'dd MMM yyyy') {
     return parseIcelandicDate(value, langModule);
   }
-  return parse(value, displayFormat, new Date(), langModule);
+  return parseDate(value, displayFormat, date, langModule);
 };
 
 @Component({ tag: 'fw-datepicker', styleUrl: 'datepicker.scss', shadow: true })
@@ -375,7 +377,7 @@ export class Datepicker {
 
     return this.displayFormat
       ? formatISO(
-          parseDate(value, this.displayFormat, {
+          parse(value, this.displayFormat, new Date(), {
             locale: this.langModule,
           })
         )
@@ -903,11 +905,11 @@ export class Datepicker {
     fromDate = fromDate?.trim();
     toDate = toDate?.trim();
 
-    const parsedFromDate = parseDate(fromDate, this.displayFormat, {
+    const parsedFromDate = parse(fromDate, this.displayFormat, new Date(), {
       locale: this.langModule,
     });
 
-    const parsedToDate = parseDate(toDate, this.displayFormat, {
+    const parsedToDate = parse(toDate, this.displayFormat, new Date(), {
       locale: this.langModule,
     });
 
@@ -1010,12 +1012,12 @@ export class Datepicker {
 
   processValueChange(val, emitChange = false) {
     // show error if not ISO format and not display format
-    const parsedDate = parseDate(val, this.displayFormat, {
+    const parsedDate = parse(val, this.displayFormat, new Date(), {
       locale: this.langModule,
     });
 
     const year = getYear(
-      parseDate(val, this.displayFormat, {
+      parse(val, this.displayFormat, new Date(), {
         locale: this.langModule,
       })
     );
