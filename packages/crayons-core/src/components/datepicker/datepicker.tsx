@@ -102,18 +102,19 @@ const parseIcelandicDate = (value, langModule) => {
     /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
     (match) => icelandicMonthMapper[match]
   );
-  return parse(correctedDate, icelandicLanguageDisplayFormat, new Date(), {
-    locale: langModule,
-  });
+  return parse(
+    correctedDate,
+    icelandicLanguageDisplayFormat,
+    new Date(),
+    langModule
+  );
 };
 
 const parseDate = (value, displayFormat, langModule) => {
-  if (langModule?.code === 'is' && displayFormat === 'dd MMM yyyy') {
+  if (langModule?.locale?.code === 'is' && displayFormat === 'dd MMM yyyy') {
     return parseIcelandicDate(value, langModule);
   }
-  return parse(value, displayFormat, new Date(), {
-    locale: langModule,
-  });
+  return parse(value, displayFormat, new Date(), langModule);
 };
 
 @Component({ tag: 'fw-datepicker', styleUrl: 'datepicker.scss', shadow: true })
@@ -902,11 +903,11 @@ export class Datepicker {
     fromDate = fromDate?.trim();
     toDate = toDate?.trim();
 
-    const parsedFromDate = parse(fromDate, this.displayFormat, new Date(), {
+    const parsedFromDate = parseDate(fromDate, this.displayFormat, {
       locale: this.langModule,
     });
 
-    const parsedToDate = parse(toDate, this.displayFormat, new Date(), {
+    const parsedToDate = parseDate(toDate, this.displayFormat, {
       locale: this.langModule,
     });
 
@@ -926,12 +927,14 @@ export class Datepicker {
     if (
       !isValidFromDate ||
       !isValidToDate ||
-      !isMatch(fromDate, this.displayFormat, {
-        locale: this.langModule,
-      }) ||
-      !isMatch(toDate, this.displayFormat, {
-        locale: this.langModule,
-      }) ||
+      (this.langModule?.code !== 'is' &&
+        !isMatch(fromDate, this.displayFormat, {
+          locale: this.langModule,
+        })) ||
+      (this.langModule?.code !== 'is' &&
+        !isMatch(toDate, this.displayFormat, {
+          locale: this.langModule,
+        })) ||
       year < this.minYear ||
       year > this.maxYear ||
       toYear < this.minYear ||
