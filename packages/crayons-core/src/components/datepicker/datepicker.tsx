@@ -120,10 +120,10 @@ const parse = (value, displayFormat, date, langModule) => {
   return parseDate(value, displayFormat, date, langModule);
 };
 
-const isNoMatch = (value, displayFormat, langModule) => {
+const isMatch = (value, displayFormat, langModule) => {
   return (
-    langModule?.locale?.code !== 'is' &&
-    !parseIsMatch(value, displayFormat, langModule)
+    !(langModule?.locale?.code !== 'is') &&
+    parseIsMatch(value, displayFormat, langModule)
   );
 };
 
@@ -937,10 +937,10 @@ export class Datepicker {
     if (
       !isValidFromDate ||
       !isValidToDate ||
-      isNoMatch(fromDate, this.displayFormat, {
+      !isMatch(fromDate, this.displayFormat, {
         locale: this.langModule,
       }) ||
-      isNoMatch(toDate, this.displayFormat, {
+      !isMatch(toDate, this.displayFormat, {
         locale: this.langModule,
       }) ||
       year < this.minYear ||
@@ -1030,7 +1030,7 @@ export class Datepicker {
       year < this.minYear ||
       year > this.maxYear ||
       !isValid(parsedDate) ||
-      isNoMatch(val, this.displayFormat, {
+      !isMatch(val, this.displayFormat, {
         locale: this.langModule,
       }) ||
       !this.isDateWithinMinMaxDate(parsedDate.valueOf(), false)
