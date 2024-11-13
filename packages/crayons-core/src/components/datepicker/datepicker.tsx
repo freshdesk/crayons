@@ -21,7 +21,7 @@ import {
   startOfDay,
   getDaysInMonth,
   format,
-  isMatch,
+  isMatch as parseIsMatch,
   formatISO,
   addDays,
   startOfWeek,
@@ -118,6 +118,13 @@ const parse = (value, displayFormat, date, langModule) => {
     return parseIcelandicDate(value, langModule);
   }
   return parseDate(value, displayFormat, date, langModule);
+};
+
+const isMatch = (value, displayFormat, langModule) => {
+  return (
+    langModule?.locale?.code !== 'is' &&
+    parseIsMatch(value, displayFormat, langModule)
+  );
 };
 
 @Component({ tag: 'fw-datepicker', styleUrl: 'datepicker.scss', shadow: true })
@@ -930,14 +937,12 @@ export class Datepicker {
     if (
       !isValidFromDate ||
       !isValidToDate ||
-      (this.langModule?.code !== 'is' &&
-        !isMatch(fromDate, this.displayFormat, {
-          locale: this.langModule,
-        })) ||
-      (this.langModule?.code !== 'is' &&
-        !isMatch(toDate, this.displayFormat, {
-          locale: this.langModule,
-        })) ||
+      !isMatch(fromDate, this.displayFormat, {
+        locale: this.langModule,
+      }) ||
+      !isMatch(toDate, this.displayFormat, {
+        locale: this.langModule,
+      }) ||
       year < this.minYear ||
       year > this.maxYear ||
       toYear < this.minYear ||
@@ -1025,10 +1030,9 @@ export class Datepicker {
       year < this.minYear ||
       year > this.maxYear ||
       !isValid(parsedDate) ||
-      (this.langModule?.code !== 'is' &&
-        !isMatch(val, this.displayFormat, {
-          locale: this.langModule,
-        })) ||
+      !isMatch(val, this.displayFormat, {
+        locale: this.langModule,
+      }) ||
       !this.isDateWithinMinMaxDate(parsedDate.valueOf(), false)
     ) {
       this.isDateInvalid = !!val;
