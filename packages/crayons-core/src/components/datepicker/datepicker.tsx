@@ -374,7 +374,7 @@ export class Datepicker {
 
     return this.displayFormat
       ? formatISO(
-          parse(value, this.displayFormat, new Date(), {
+          parseDate(value, this.displayFormat, {
             locale: this.langModule,
           })
         )
