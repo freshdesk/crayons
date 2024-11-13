@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import {
   isValid,
-  parse as parseDate,
+  parse,
   parseISO,
   getYear,
   getMonth,
@@ -102,19 +102,20 @@ const parseIcelandicDate = (value, langModule) => {
     /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
     (match) => icelandicMonthMapper[match]
   );
-  return parseDate(correctedDate, icelandicLanguageDisplayFormat, new Date(), {
+  return parse(correctedDate, icelandicLanguageDisplayFormat, new Date(), {
     locale: langModule,
   });
 };
 
-const parse = (value, displayFormat, langModule) => {
+const parseDate = (value, displayFormat, langModule) => {
   if (langModule?.code === 'is' && displayFormat === 'dd MMM yyyy') {
     return parseIcelandicDate(value, langModule);
   }
-  return parseDate(value, displayFormat, new Date(), {
+  return parse(value, displayFormat, new Date(), {
     locale: langModule,
   });
 };
+
 @Component({ tag: 'fw-datepicker', styleUrl: 'datepicker.scss', shadow: true })
 export class Datepicker {
   @State() showDatePicker: boolean;
@@ -373,7 +374,7 @@ export class Datepicker {
 
     return this.displayFormat
       ? formatISO(
-          parse(value, this.displayFormat, {
+          parse(value, this.displayFormat, new Date(), {
             locale: this.langModule,
           })
         )
@@ -395,6 +396,7 @@ export class Datepicker {
                   locale: this.langModule,
                 }),
                 this.displayFormat,
+                new Date(),
                 {
                   locale: this.langModule,
                 }
@@ -409,6 +411,7 @@ export class Datepicker {
                   locale: this.langModule,
                 }),
                 this.displayFormat,
+                new Date(),
                 {
                   locale: this.langModule,
                 }
@@ -420,7 +423,7 @@ export class Datepicker {
     return (
       (this.value &&
         formatISO(
-          parse(this.value, this.displayFormat, {
+          parse(this.value, this.displayFormat, new Date(), {
             locale: this.langModule,
           })
         )) ||
@@ -828,10 +831,10 @@ export class Datepicker {
   }
   setDateAndErrorState(checkDate = false) {
     if (this.mode === 'range' && this.fromDate && this.toDate) {
-      const fromDate = parse(this.fromDate, this.displayFormat, {
+      const fromDate = parse(this.fromDate, this.displayFormat, new Date(), {
         locale: this.langModule,
       }).valueOf();
-      const toDate = parse(this.toDate, this.displayFormat, {
+      const toDate = parse(this.toDate, this.displayFormat, new Date(), {
         locale: this.langModule,
       }).valueOf();
       this.isDateInvalid = !this.isDatewithinRange(fromDate, toDate);
@@ -899,11 +902,11 @@ export class Datepicker {
     fromDate = fromDate?.trim();
     toDate = toDate?.trim();
 
-    const parsedFromDate = parse(fromDate, this.displayFormat, {
+    const parsedFromDate = parse(fromDate, this.displayFormat, new Date(), {
       locale: this.langModule,
     });
 
-    const parsedToDate = parse(toDate, this.displayFormat, {
+    const parsedToDate = parse(toDate, this.displayFormat, new Date(), {
       locale: this.langModule,
     });
 
@@ -911,12 +914,12 @@ export class Datepicker {
     const isValidToDate = isValid(parsedToDate);
 
     const year = getYear(
-      parse(fromDate, this.displayFormat, {
+      parse(fromDate, this.displayFormat, new Date(), {
         locale: this.langModule,
       })
     );
     const toYear = getYear(
-      parse(toDate, this.displayFormat, {
+      parse(toDate, this.displayFormat, new Date(), {
         locale: this.langModule,
       })
     );
@@ -951,12 +954,12 @@ export class Datepicker {
     this.fromDate = fromDate;
     this.toDate = toDate;
     const chosenFromMonth = getMonth(
-      parse(fromDate, this.displayFormat, {
+      parse(fromDate, this.displayFormat, new Date(), {
         locale: this.langModule,
       })
     );
     const chosenToMonth = getMonth(
-      parse(toDate, this.displayFormat, {
+      parse(toDate, this.displayFormat, new Date(), {
         locale: this.langModule,
       })
     );
@@ -965,17 +968,17 @@ export class Datepicker {
       this.month = this.toMonth - 1;
     } else {
       this.month = getMonth(
-        parse(fromDate, this.displayFormat, {
+        parse(fromDate, this.displayFormat, new Date(), {
           locale: this.langModule,
         })
       );
       this.toMonth = this.month === 11 ? 0 : this.month + 1;
     }
-    this.startDate = parse(fromDate, this.displayFormat, {
+    this.startDate = parse(fromDate, this.displayFormat, new Date(), {
       locale: this.langModule,
     }).valueOf();
 
-    this.endDate = parse(toDate, this.displayFormat, {
+    this.endDate = parse(toDate, this.displayFormat, new Date(), {
       locale: this.langModule,
     }).valueOf();
     this.toYear =
@@ -1004,12 +1007,12 @@ export class Datepicker {
 
   processValueChange(val, emitChange = false) {
     // show error if not ISO format and not display format
-    const parsedDate = parse(val, this.displayFormat, {
+    const parsedDate = parseDate(val, this.displayFormat, {
       locale: this.langModule,
     });
 
     const year = getYear(
-      parse(val, this.displayFormat, {
+      parseDate(val, this.displayFormat, {
         locale: this.langModule,
       })
     );
@@ -1037,12 +1040,12 @@ export class Datepicker {
     this.year = year;
 
     this.month = getMonth(
-      parse(val, this.displayFormat, {
+      parse(val, this.displayFormat, new Date(), {
         locale: this.langModule,
       })
     );
     this.selectedDay = getDate(
-      parse(val, this.displayFormat, {
+      parse(val, this.displayFormat, new Date(), {
         locale: this.langModule,
       })
     );
@@ -1167,6 +1170,7 @@ export class Datepicker {
       const parsedDate = parse(
         this.clickedDateValue || this.value || this.formatDateTime(),
         this.displayFormat,
+        new Date(),
         {
           locale: this.langModule,
         }
@@ -1377,6 +1381,7 @@ export class Datepicker {
       const parsedDate = parse(
         this.clickedDateValue || this.value,
         this.displayFormat,
+        new Date(),
         {
           locale: this.langModule,
         }
@@ -1562,11 +1567,16 @@ export class Datepicker {
           this.value?.split(TranslationController.t('datepicker.to')) || [];
         fromDateStr = fromDateStr?.trim();
         toDateStr = toDateStr?.trim();
-        const parsedFromDate = parse(fromDateStr, this.displayFormat, {
-          locale: this.langModule,
-        }).valueOf();
+        const parsedFromDate = parse(
+          fromDateStr,
+          this.displayFormat,
+          new Date(),
+          {
+            locale: this.langModule,
+          }
+        ).valueOf();
 
-        const parsedToDate = parse(toDateStr, this.displayFormat, {
+        const parsedToDate = parse(toDateStr, this.displayFormat, new Date(), {
           locale: this.langModule,
         }).valueOf();
 
@@ -1583,7 +1593,7 @@ export class Datepicker {
       // handle resetting of selectedDay on clicking cancel
       if (this.value) {
         this.clickedDateValue = this.value;
-        const parsedDate = parse(this.value, this.displayFormat, {
+        const parsedDate = parse(this.value, this.displayFormat, new Date(), {
           locale: this.langModule,
         });
         const date = getDate(parsedDate);
