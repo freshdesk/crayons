@@ -1016,13 +1016,11 @@ export class Datepicker {
     const parsedDate = parse(val, this.displayFormat, new Date(), {
       locale: this.langModule,
     });
-
     const year = getYear(
       parse(val, this.displayFormat, new Date(), {
         locale: this.langModule,
       })
     );
-
     if (
       year < this.minYear ||
       year > this.maxYear ||
@@ -1581,11 +1579,9 @@ export class Datepicker {
             locale: this.langModule,
           }
         ).valueOf();
-
         const parsedToDate = parse(toDateStr, this.displayFormat, new Date(), {
           locale: this.langModule,
         }).valueOf();
-
         if (this.startDate !== parsedFromDate) {
           this.startDate = parsedFromDate;
         }
