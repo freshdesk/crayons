@@ -122,9 +122,9 @@ const parse = (value, displayFormat, date, langModule) => {
 
 const isMatch = (value, displayFormat, langModule) => {
   if (langModule?.locale?.code !== 'is') {
-    parseIsMatch(value, displayFormat, langModule);
+    return parseIsMatch(value, displayFormat, langModule);
   }
-  return false;
+  return true;
 };
 
 @Component({ tag: 'fw-datepicker', styleUrl: 'datepicker.scss', shadow: true })
