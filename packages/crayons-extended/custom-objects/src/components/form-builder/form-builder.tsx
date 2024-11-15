@@ -78,7 +78,7 @@ export class FormBuilder {
    */
   @Prop({ mutable: true }) formValues = null;
   /**
-   * object to store the lookup target entities
+   * object to store the lookup target entitie
    */
   @Prop({ mutable: true }) lookupTargetObjects = null;
   /**
