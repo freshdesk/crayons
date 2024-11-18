@@ -33,3 +33,10 @@ export const debounce = (fn, context, timeout = 1000) => {
     }, timeout);
   };
 };
+
+export const parseBoolean = (value: any) => {
+  if (typeof value === 'string') {
+    return value === 'true';
+  }
+  return !!value;
+};
