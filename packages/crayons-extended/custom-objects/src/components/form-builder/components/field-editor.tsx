@@ -42,6 +42,8 @@ import {
   validateLevels,
 } from '../utils/form-builder-utils';
 
+import { parseBoolean } from '../../../utils/utils';
+
 @Component({
   tag: 'fw-field-editor',
   styleUrl: 'field-editor.scss',
@@ -301,7 +303,9 @@ export class FieldEditor {
         hasCustomProperty(objDP, 'isSection') && objDP?.isSection === true
           ? true
           : false;
-      this.editSectionField = objDP.field_options?.is_section_field;
+      this.editSectionField = parseBoolean(
+        objDP.field_options?.is_section_field
+      );
       // Currently supports dropdown format
       this.isDependentField = objDP.type === 'DEPENDENT_FIELD';
 
@@ -511,22 +515,32 @@ export class FieldEditor {
     } else {
       try {
         const strNewFieldLabel = strInputValue.toLowerCase();
-        let arrFields = this.formValues.fields;
-        // Check if any field has sections and concatenate fields from sections
-        arrFields = arrFields.reduce((acc, field) => {
-          if (
-            field?.field_options?.has_sections &&
-            Array.isArray(field?.fields)
-          ) {
-            return acc.concat(field?.fields);
-          }
-          return acc.concat(field);
-        }, []);
+        const initialFields = this.formValues.fields;
+        const collectedFields = initialFields.reduce(
+          (acc, field) => {
+            acc.topLevelFields.push(field); // Add each field to the main array
+            // Collect section fields separately if has_sections is true
+            if (
+              field?.field_options?.has_sections &&
+              Array.isArray(field.fields)
+            ) {
+              acc.sectionFields.push(...field.fields);
+            }
+            return acc;
+          },
+          { topLevelFields: [], sectionFields: [] }
+        );
+
+        // Merge all fields at the end
+        const convFields = [
+          ...collectedFields.topLevelFields,
+          ...collectedFields.sectionFields,
+        ];
 
         if (
-          arrFields &&
-          arrFields.length > 0 &&
-          arrFields.some(
+          convFields &&
+          convFields.length > 0 &&
+          convFields.some(
             (e, fieldIndex) =>
               this.index !== fieldIndex &&
               !e?.isNew &&
@@ -2022,7 +2036,7 @@ export class FieldEditor {
         }
       } else if (
         this.dataProvider.isSectionFieldMatch &&
-        this.dataProvider?.field_options?.is_section_field &&
+        parseBoolean(this.dataProvider?.field_options?.is_section_field) &&
         this.disabledSort
       ) {
         const elDefaultCustomTag = this.renderFwLabel({
@@ -2074,6 +2088,13 @@ export class FieldEditor {
       this.expanded ||
       this.createDynamicSection ||
       this.sectionCreatedForAllChoices;
+
+    const showDeleteBtn =
+      !this.expanded &&
+      !this.isPrimaryField &&
+      !this.isDeleting &&
+      !this.isDefaultNonCustomField &&
+      !this.editSectionField;
 
     return (
       <Host tabIndex='-1'>
@@ -2152,22 +2173,18 @@ export class FieldEditor {
                 </fw-button>
               </fw-tooltip>
             )}
-            {!this.expanded &&
-              !this.isPrimaryField &&
-              !this.isDeleting &&
-              !this.isDefaultNonCustomField &&
-              !this.editSectionField && (
-                <fw-button
-                  part='delete-field-btn'
-                  size='icon'
-                  color='secondary'
-                  disabled={boolDisableDelete}
-                  class={`${strBaseClassName}-delete-button`}
-                  onFwClick={this.deleteFieldClickHandler}
-                >
-                  <fw-icon name='delete'></fw-icon>
-                </fw-button>
-              )}
+            {showDeleteBtn && (
+              <fw-button
+                part='delete-field-btn'
+                size='icon'
+                color='secondary'
+                disabled={boolDisableDelete}
+                class={`${strBaseClassName}-delete-button`}
+                onFwClick={this.deleteFieldClickHandler}
+              >
+                <fw-icon name='delete'></fw-icon>
+              </fw-button>
+            )}
             {/* {!this.expanded && this.isDefaultNonCustomField && (
               <span class={`${strBaseClassName}-lock-container`}>
                 <fw-icon name='lock'></fw-icon>

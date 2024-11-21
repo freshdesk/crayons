@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import {
   isValid,
-  parse,
+  parse as parseDate,
   parseISO,
   getYear,
   getMonth,
@@ -21,7 +21,7 @@ import {
   startOfDay,
   getDaysInMonth,
   format,
-  isMatch,
+  isMatch as parseIsMatch,
   formatISO,
   addDays,
   startOfWeek,
@@ -81,6 +81,52 @@ const getWeekDays = (lang): any => {
     format(addDays(startOfWeek(new Date()), i), 'EEEEE', { locale: lang })
   );
 };
+
+const parseIcelandicDate = (value, langModule) => {
+  // For Icelandic language, the date format is different. There is a discrepency which is handled in this PR https://github.com/date-fns/date-fns/pull/3934
+  if (!value) return value;
+  const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
+  const icelandicMonthMapper = {
+    'jan.': 'jan.',
+    'feb.': 'feb.',
+    'mars': 'm',
+    'apríl': 'apríl',
+    'maí': 'maí',
+    'júní': 'júní',
+    'júlí': 'júlí',
+    'ágúst': 'á',
+    'sept.': 's',
+    'okt.': 'ó',
+    'nóv.': 'n',
+    'des.': 'd',
+  };
+  const correctedDate = value?.replace(
+    /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
+    (match) => icelandicMonthMapper[match]
+  );
+  return parseDate(
+    correctedDate,
+    icelandicLanguageDisplayFormat,
+    new Date(),
+    langModule
+  );
+};
+
+const parse = (value, displayFormat, date, langModule) => {
+  if (!value) return value;
+  if (langModule?.locale?.code === 'is' && displayFormat === 'dd MMM yyyy') {
+    return parseIcelandicDate(value, langModule);
+  }
+  return parseDate(value, displayFormat, date, langModule);
+};
+
+const isMatch = (value, displayFormat, langModule) => {
+  if (langModule?.locale?.code !== 'is') {
+    return parseIsMatch(value, displayFormat, langModule);
+  }
+  return true;
+};
+
 @Component({ tag: 'fw-datepicker', styleUrl: 'datepicker.scss', shadow: true })
 export class Datepicker {
   @State() showDatePicker: boolean;
@@ -336,33 +382,6 @@ export class Datepicker {
 
   private formatDate(value) {
     if (!value) return value;
-    // For Icelandic language, the date format is different. There is a discrepency which is handled in this PR https://github.com/date-fns/date-fns/pull/3934
-    if (this.langModule?.code === 'is' && this.dateFormat === 'dd MMM yyyy') {
-      const icelandicLanguageDisplayFormat = 'dd MMMM yyyy';
-      const icelandicMonthMapper = {
-        'jan.': 'jan.',
-        'feb.': 'feb.',
-        'mars': 'm',
-        'apríl': 'apríl',
-        'maí': 'maí',
-        'júní': 'júní',
-        'júlí': 'júlí',
-        'ágúst': 'á',
-        'sept.': 's',
-        'okt.': 'ó',
-        'nóv.': 'n',
-        'des.': 'd',
-      };
-      const correctedDate = value.replace(
-        /jan\.|feb\.|mars|apríl|maí|júní|júlí|ágúst|sept\.|okt\.|nóv\.|des\./g,
-        (match) => icelandicMonthMapper[match]
-      );
-      return formatISO(
-        parse(correctedDate, icelandicLanguageDisplayFormat, new Date(), {
-          locale: this.langModule,
-        })
-      );
-    }
 
     return this.displayFormat
       ? formatISO(

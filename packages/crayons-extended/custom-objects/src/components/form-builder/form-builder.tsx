@@ -30,6 +30,7 @@ import presetSchema from './assets/form-builder-preset.json';
 import formMapper from './assets/form-mapper.json';
 import { debounce } from '../../utils/utils';
 import { TranslationController } from '../../global/Translation';
+import { parseBoolean } from '../../utils/utils';
 
 @Component({
   tag: 'fw-form-builder',
@@ -691,7 +692,7 @@ export class FormBuilder {
         return fields.reduce((results, field) => {
           // Check if the field label matches the search text
           if (field.label.toLowerCase().includes(strSearchableText)) {
-            if (field?.field_options?.is_section_field) {
+            if (parseBoolean(field?.field_options?.is_section_field)) {
               field.isSectionFieldMatch = true;
             }
             results.push(field);
@@ -705,7 +706,7 @@ export class FormBuilder {
       };
       cleanupSearchFlags(arrFieldElements);
       const arrResults = searchFields(arrFieldElements); // Get all matching results including those in nested sections
-      this.searching = arrResults.length > 0;
+      this.searching = true; // Set the searching flag to ensure the search results are displayed when the result is empty
       this.arrSearchedFields = arrResults.length
         ? deepCloneObject(arrResults)
         : null;

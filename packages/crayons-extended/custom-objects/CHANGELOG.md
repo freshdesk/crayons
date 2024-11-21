@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-beta.24](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.23...@freshworks/crayons-custom-objects@1.4.0-beta.24) (2024-11-12)
+
+### Bug Fixes
+
+- added the fix for label validation error for duplicate name ([#950](https://github.com/freshworks/crayons/issues/950)) ([35814f3](https://github.com/freshworks/crayons/commit/35814f3395e51ab12931969cfec8f0049dedb2f9))
+- ensure the empty search screen is available is available when the search result is empty ([fa6c89d](https://github.com/freshworks/crayons/commit/fa6c89d829664f541cad6b741c23732148a7a16f))
+
 ## [1.4.0-beta.22](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.21...@freshworks/crayons-custom-objects@1.4.0-beta.22) (2024-10-28)
 
 ### Bug Fixes

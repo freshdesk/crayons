@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.0-beta.21](https://github.com/freshworks/crayons/compare/@freshworks/crayons@4.3.0-beta.20...@freshworks/crayons@4.3.0-beta.21) (2024-11-14)
+
+### Bug Fixes
+
+- add validation for is language for isValid ([4110887](https://github.com/freshworks/crayons/commit/411088792a8fccdff2bc2a7dd2201069f5c1dd9b))
+- check for error handling for format related issue ([1a2b66f](https://github.com/freshworks/crayons/commit/1a2b66fb95832b10d5ebe37c88e1925f30caccf5))
+- datepicker issue ([039369f](https://github.com/freshworks/crayons/commit/039369f71f1a309fd5d9dac2260104138032a647))
+- datepicker issue changes on isValid ([d077d85](https://github.com/freshworks/crayons/commit/d077d858b4e4a71316edbf0e0943cfd200907d58))
+- datepicker issue fix ([26b7a18](https://github.com/freshworks/crayons/commit/26b7a1830782f5cf4beca9d90ad60434b9760383))
+- datepicker issue on filter changes ([f422876](https://github.com/freshworks/crayons/commit/f4228764b0187dd8bd21358684526cb9ea315eca))
+- datepicker year issue fix ([20852fc](https://github.com/freshworks/crayons/commit/20852fcc9e39c196bba81da8543d7c9222164046))
+- datepicket changes on isMatch ([38d84f8](https://github.com/freshworks/crayons/commit/38d84f842d4160e9ef7cf3d62d1e78e59c3d4c28))
+- emitEvent error handling on parsing of icelandic language ([6ecaec9](https://github.com/freshworks/crayons/commit/6ecaec9f4786e8d46a5174c814300f585f2f16d4))
+- generalising the datepicker for icelandic language ([d00f87b](https://github.com/freshworks/crayons/commit/d00f87bf533abc3f7d3c6494dff363d91e35b715))
+- is date validation and matching restriction ([ccf0af2](https://github.com/freshworks/crayons/commit/ccf0af26640415bcfa2bd0d21d3e29cef58acd1d))
+- isMatch change issue for icelandic language ([d44532c](https://github.com/freshworks/crayons/commit/d44532c6b7c20e602616582ddee292e8a64a6141))
+- isMatch changes retaining ([802d614](https://github.com/freshworks/crayons/commit/802d6142954c4c9e8bdb0f1024e98f1ee1971197))
+- isMatch negation changes ([4a145bc](https://github.com/freshworks/crayons/commit/4a145bc7505954f9ce71d9661c2122e7e214f6b7))
+- isValid changes for datefixer ([2ba68f4](https://github.com/freshworks/crayons/commit/2ba68f4820c4936b788bdbb8e7a27dac03a15c68))
+- parse date on filter ([4edde18](https://github.com/freshworks/crayons/commit/4edde18ce3c1b55a0a27ee7c79c424c11ac00565))
+- parsed date for dateInvalid check ([9fc9b73](https://github.com/freshworks/crayons/commit/9fc9b739fae26d47b4872df2998522de0cfd31a0))
+- refresh handle popover parse on icelandic language issue fix ([5677657](https://github.com/freshworks/crayons/commit/56776579250a8967a9bab5772fe66e1a5e5ff881))
+- refresh handle popover parse on icelandic language issue fix ([22d391f](https://github.com/freshworks/crayons/commit/22d391fcf2345db9f1d1c16c73c9dc865e43a364))
+- remove condition changes for datepicker ([e51919c](https://github.com/freshworks/crayons/commit/e51919cf6764b60cf44130c1f3469965b8d33750))
+- retain isMatch funtionality and change in custom function ([1be7cac](https://github.com/freshworks/crayons/commit/1be7cac16adf67c8749791b229dad0148f5b1a45))
+- reverse the changes on change value of datepicker ([e4a721e](https://github.com/freshworks/crayons/commit/e4a721ea53431d39a28a65a04c3066cc4b2ac61c))
+- test cases failing on isMatch changes completed ([81e488b](https://github.com/freshworks/crayons/commit/81e488b9b0d5512b3b49d8b382f312f399af0016))
+
 ## [4.3.0-beta.20](https://github.com/freshworks/crayons/compare/@freshworks/crayons@4.3.0-beta.19...@freshworks/crayons@4.3.0-beta.20) (2024-11-06)
 
 ### Bug Fixes

@@ -294,6 +294,7 @@ export class FbFieldDropdown {
         type: 'REPOSITION',
         errorType: this.errorType,
         value: [...this.dataProvider],
+        choiceIds: this.choiceIds,
         level: this.level,
       });
     }
@@ -400,11 +401,11 @@ export class FbFieldDropdown {
       dpSource.length > 0
         ? dpSource
             .map((dataItem, index) => {
-              const isNewChoice = !hasCustomProperty(dataItem, 'id');
+              const isNewChoice = !hasCustomProperty(dataItem, 'id'),
+                hasSection = !!dataItem?.choice_options?.section_name;
               const isChoiceDisabled =
-                !isNewChoice &&
-                (this.disabled || !!dataItem?.choice_options?.section_name);
-              if (isChoiceDisabled) {
+                !isNewChoice && (this.disabled || hasSection);
+              if (hasSection) {
                 return (
                   <fw-tooltip
                     placement='bottom'
