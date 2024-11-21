@@ -186,7 +186,13 @@ export class FilterCondition {
           ></fw-date-condition>
         );
       case 'DATE_RANGE':
-        props = { displayFormat: 'dd MMM yyyy', readonly: true, mode: 'range' };
+        props = {
+          displayFormat: 'dd MMM yyyy',
+          readonly: true,
+          mode: 'range',
+          maxYear: 2080,
+          minYear: 1970,
+        };
         if (this.value) {
           const { from: fromDate, to: toDate } = this.value;
           if (fromDate && toDate) {
