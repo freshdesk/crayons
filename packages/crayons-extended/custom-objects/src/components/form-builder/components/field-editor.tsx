@@ -541,8 +541,8 @@ export class FieldEditor {
           convFields &&
           convFields.length > 0 &&
           convFields.some(
-            (e, fieldIndex) =>
-              this.index !== fieldIndex &&
+            (e) =>
+              this.dataProvider.id !== e.id &&
               !e?.isNew &&
               e.label.toLowerCase() === strNewFieldLabel
           )
