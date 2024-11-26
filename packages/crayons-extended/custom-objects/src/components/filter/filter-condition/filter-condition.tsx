@@ -122,6 +122,12 @@ export class FilterCondition {
 
   renderContent(condition) {
     let props = {};
+    const dateProps = {
+      displayFormat: 'dd MMM yyyy',
+      readonly: true,
+      maxYear: 2080,
+      minYear: 1970,
+    };
     switch (condition.type) {
       case 'TEXT':
       case 'NUMBER':
@@ -172,8 +178,7 @@ export class FilterCondition {
         );
       case 'DATE':
         props = {
-          displayFormat: 'dd MMM yyyy',
-          readonly: true,
+          ...dateProps,
           value: this.value,
         };
         return (
@@ -186,7 +191,10 @@ export class FilterCondition {
           ></fw-date-condition>
         );
       case 'DATE_RANGE':
-        props = { displayFormat: 'dd MMM yyyy', readonly: true, mode: 'range' };
+        props = {
+          ...dateProps,
+          mode: 'range',
+        };
         if (this.value) {
           const { from: fromDate, to: toDate } = this.value;
           if (fromDate && toDate) {
