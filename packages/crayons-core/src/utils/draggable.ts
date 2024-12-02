@@ -133,7 +133,7 @@ export class Draggable {
       this.dragContainer?.children?.length > 15;
 
     // Check if the field is required
-    const isFieldRequired = dragElement.dataProvider.required;
+    const isFieldRequired = dragElement?.dataProvider?.required;
     return (
       isSection &&
       (isFieldTypeNotAllowed ||
