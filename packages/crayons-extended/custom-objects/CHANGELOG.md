@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-beta.26](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.25...@freshworks/crayons-custom-objects@1.4.0-beta.26) (2024-11-26)
+
+### Bug Fixes
+
+- added the fix for validation label ([#956](https://github.com/freshworks/crayons/issues/956)) ([40176fc](https://github.com/freshworks/crayons/commit/40176fc49f4cd54faeebb1cd634cddeac53a9971))
+- enable date filter to contain maxYear for filters in custom object ([0c3aa43](https://github.com/freshworks/crayons/commit/0c3aa43782af0cda33b344c842547c7f0f2d2ffc))
+- set condition for maxYear and minYear for DATE props ([0734b71](https://github.com/freshworks/crayons/commit/0734b71f461adb2767248de08b908bd6b8519346))
+
 ## [1.4.0-beta.24](https://github.com/freshworks/crayons/compare/@freshworks/crayons-custom-objects@1.4.0-beta.23...@freshworks/crayons-custom-objects@1.4.0-beta.24) (2024-11-12)
 
 ### Bug Fixes
