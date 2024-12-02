@@ -132,7 +132,7 @@ export class Draggable {
     const isSectionFieldLimitExceeded =
       this.dragContainer?.children?.length > 15;
 
-    // Check if the field is required
+    // Check if the dragElement is present and the field is required
     const isFieldRequired = dragElement?.dataProvider?.required;
     return (
       isSection &&
