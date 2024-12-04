@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0-beta.22](https://github.com/freshworks/crayons/compare/@freshworks/crayons@4.3.0-beta.21...@freshworks/crayons@4.3.0-beta.22) (2024-12-04)
+
+
+### Bug Fixes
+
+* unable to drag and drop fields on custom objects ([2c4228e](https://github.com/freshworks/crayons/commit/2c4228eeb309b6b6febec6953e89ea5738690ee4))
+
+
+
+
+
 ## [4.3.0-beta.21](https://github.com/freshworks/crayons/compare/@freshworks/crayons@4.3.0-beta.20...@freshworks/crayons@4.3.0-beta.21) (2024-11-14)
 
 ### Bug Fixes
