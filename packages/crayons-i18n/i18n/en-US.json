@@ -214,7 +214,7 @@
       "deleteSection": "Delete Section",
       "disableChoiceOption": "This option is used to create a section and cannot be edited",
       "errorMessages" : {
-        "DROPDOWN" : "Dropdown fields cannot be added into sections",
+        "DROPDOWN" : "This field cannot be moved into sections",
         "MULTI_SELECT" : "Multi Select  Dropdown fields cannot be added into sections",
         "DEPENDENT_FIELD" : "Dependent fields cannot be added into sections",
         "RELATIONSHIP" : "Lookup fields cannot be added into sections",

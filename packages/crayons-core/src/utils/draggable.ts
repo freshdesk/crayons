@@ -1,4 +1,5 @@
 import { debounce, cloneNodeWithEvents } from './index';
+import { parseBoolean } from './list-utils';
 
 //Global Variables
 let dragElement;
@@ -126,8 +127,7 @@ export class Draggable {
     const hasSectionsInFieldOptions =
       dragElement.dataProvider?.type === 'DROPDOWN' &&
       dragElement.dataProvider?.field_options &&
-      dragElement.dataProvider?.field_options.has_sections;
-
+      parseBoolean(dragElement.dataProvider?.field_options?.has_sections);
     // Check if the section already has the maximum number of fields
     const isSectionFieldLimitExceeded =
       this.dragContainer?.children?.length > 15;
