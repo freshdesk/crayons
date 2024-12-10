@@ -3,16 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [4.3.0-beta.3](https://github.com/freshworks/crayons/compare/@freshworks/crayons-i18n@4.3.0-beta.2...@freshworks/crayons-i18n@4.3.0-beta.3) (2024-12-10)
-
+## [4.3.0-beta.3](https://github.com/freshworks/crayons/compare/@freshworks/crayons-i18n@4.3.0-beta.2...@freshworks/crayons-i18n@4.3.0-beta.3) (2024-12-10)
 
 ### Bug Fixes
 
-* added the error message for section inside section ([#959](https://github.com/freshworks/crayons/issues/959)) ([277a49f](https://github.com/freshworks/crayons/commit/277a49ff3ca19a659f84d914712448e83e5179a8))
-
-
-
-
+- added the error message for section inside section ([#959](https://github.com/freshworks/crayons/issues/959)) ([277a49f](https://github.com/freshworks/crayons/commit/277a49ff3ca19a659f84d914712448e83e5179a8))
 
 ## [4.3.0-beta.2](https://github.com/freshworks/crayons/compare/@freshworks/crayons-i18n@4.3.0-beta.1...@freshworks/crayons-i18n@4.3.0-beta.2) (2024-10-15)
 
