@@ -309,7 +309,7 @@ export class FormControl {
             placeholder: this.placeholder,
             label: this.label,
             required: this.required,
-            disabled: this.disabled,
+            disabled: true,
             multiple: this.type === 'MULTI_SELECT',
             state: (this.touched && this.error && 'error') || 'normal',
             ['hint-text']: this.hint,
