@@ -10,6 +10,7 @@ import {
 } from '@stencil/core';
 
 import { handleKeyDown, renderHiddenField, hasSlot } from '../../utils';
+import { PopoverPlacementType } from '../../utils/types';
 
 import FieldControl from '../../function-components/field-control';
 
@@ -116,6 +117,21 @@ export class Input {
    * Error text displayed below the text box.
    */
   @Prop() errorText = '';
+
+  /**
+   * Optional tooltip for the component, shown on hover of the input box.
+   */
+  @Prop() tooltip?: string;
+
+  /**
+   * The tooltip placement type for the optional tooltip.
+   */
+  @Prop() tooltipPlacement?: PopoverPlacementType;
+
+  /**
+   * Truncate title on text overflow
+   */
+  @Prop() truncateOnOverflow = false;
 
   /**
    * Triggered when the input box comes into focus.
@@ -271,6 +287,8 @@ export class Input {
         warningText={this.warningText}
         hasWarningTextSlot={this.hasWarningTextSlot}
         required={this.required}
+        tooltip={this.tooltip}
+        tooltipPlacement={this.tooltipPlacement}
       >
         <div
           aria-disabled={this.disabled}
@@ -307,6 +325,9 @@ export class Input {
                       this.nativeInput = input;
                     }}
                     id={this.name}
+                    class={{
+                      truncate: this.truncateOnOverflow,
+                    }}
                     autoComplete={this.autocomplete}
                     disabled={this.disabled}
                     name={this.name}
