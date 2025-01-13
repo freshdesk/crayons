@@ -119,9 +119,14 @@ export class Input {
   @Prop() errorText = '';
 
   /**
-   * Optional tooltip for the component, shown on hover of the input box.
+   * The optional tooltip's header.
    */
-  @Prop() tooltip?: string;
+  @Prop() tooltipHeader?: string;
+
+  /**
+   * Optional tooltip's content, shown on hover of the input.
+   */
+  @Prop() tooltipContent?: string;
 
   /**
    * The tooltip placement type for the optional tooltip.
@@ -287,8 +292,9 @@ export class Input {
         warningText={this.warningText}
         hasWarningTextSlot={this.hasWarningTextSlot}
         required={this.required}
-        tooltip={this.tooltip}
+        tooltipContent={this.tooltipContent}
         tooltipPlacement={this.tooltipPlacement}
+        tooltipHeader={this.tooltipHeader}
       >
         <div
           aria-disabled={this.disabled}

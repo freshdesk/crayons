@@ -41,8 +41,11 @@ export interface FieldControlProps {
   /** Whether or not a warning text slot has been provided. */
   hasWarningTextSlot?: boolean;
 
-  /** The optional tooltip text to show on hover of the input field. */
-  tooltip?: string;
+  /** The optional tooltip's header. */
+  tooltipHeader?: string;
+
+  /** The optional tooltip's content to show on hover of the input field. */
+  tooltipContent?: string;
 
   /** The tooltip placement type for the optional tooltip. */
   tooltipPlacement?: PopoverPlacementType;
@@ -62,7 +65,7 @@ const FieldControl: FunctionalComponent<FieldControlProps> = (
   const hasHintText = props.hintText ? true : props.hasHintTextSlot;
   const hasErrorText = props.errorText ? true : props.hasErrorTextSlot;
   const hasWarningText = props.warningText ? true : props.hasWarningTextSlot;
-  const hasTooltip = props.tooltip ? true : false;
+  const hasTooltip = !!props.tooltipContent;
 
   const showHintText = props.state === 'normal' ? true : false;
   const showErrorText = props.state === 'error' ? true : false;
@@ -88,9 +91,8 @@ const FieldControl: FunctionalComponent<FieldControlProps> = (
       {hasTooltip ? (
         <fw-tooltip
           placement={props.tooltipPlacement}
-          trigger='hover'
-          content={props.tooltip}
-          header={hasLabel ? props.label : ''}
+          content={props.tooltipContent}
+          header={props.tooltipHeader || ''}
           hoist
         >
           {children}

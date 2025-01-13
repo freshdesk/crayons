@@ -1181,9 +1181,13 @@ export namespace Components {
          */
         "step": string;
         /**
-          * Optional tooltip for the component, shown on hover of the input box.
+          * Optional tooltip's content, shown on hover of the input.
          */
-        "tooltip"?: string;
+        "tooltipContent"?: string;
+        /**
+          * The optional tooltip's header.
+         */
+        "tooltipHeader"?: string;
         /**
           * The tooltip placement type for the optional tooltip.
          */
@@ -4301,9 +4305,13 @@ declare namespace LocalJSX {
          */
         "step"?: string;
         /**
-          * Optional tooltip for the component, shown on hover of the input box.
+          * Optional tooltip's content, shown on hover of the input.
          */
-        "tooltip"?: string;
+        "tooltipContent"?: string;
+        /**
+          * The optional tooltip's header.
+         */
+        "tooltipHeader"?: string;
         /**
           * The tooltip placement type for the optional tooltip.
          */
