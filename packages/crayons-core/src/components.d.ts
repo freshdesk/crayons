@@ -1641,6 +1641,10 @@ export namespace Components {
          */
         "hoist": boolean;
         /**
+          * Indicates if popup must open on interacting.
+         */
+        "isActive": boolean;
+        /**
           * Placement of the popover content with respect to the popover trigger.
          */
         "placement": PopoverPlacementType;
@@ -4769,6 +4773,10 @@ declare namespace LocalJSX {
           * Option to prevent the tooltip from being clipped when the component is placed inside a container with `overflow: auto|hidden|scroll`.
          */
         "hoist"?: boolean;
+        /**
+          * Indicates if popup must open on interacting.
+         */
+        "isActive"?: boolean;
         /**
           * Triggered whenever the popover contents is closed/hidden.
          */
